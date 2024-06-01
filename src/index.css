@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #232d3f;
+  --color-secondary: #0f0f0f;
+  --color-accent: #005b41;
+  --color-accent-light: #008170;
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+.bg-accent {
+  background-color: var(--color-accent);
+}
+.bg-accent-light {
+  background-color: var(--color-accent-light);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+.text-secondary {
+  color: var(--color-secondary);
+}
+.text-accent {
+  color: var(--color-accent);
+}
+.text-accent-light {
+  color: var(--color-accent-light);
+}
+
+/* Google Fonts */
+body {
+  background-color: var(--color-secondary);
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.container {
+  @apply md:mx-40 max-h-screen;
+}
