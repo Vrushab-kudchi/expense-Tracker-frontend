@@ -1,3 +1,14 @@
+/* styles.css */
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinner {
+  -moz-appearance: textfield; /* Firefox */
+}
+
 .input {
   @apply md:text-xl px-6 py-2 rounded-full outline-none border-none focus:outline-none focus:border-none focus:ring-0;
 }

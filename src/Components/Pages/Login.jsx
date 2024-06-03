@@ -1,6 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "../../feature/auth/authSlice";
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate]);
+
+  const onSubmit = (data) => {
+    dispatch(userLogin(data));
+  };
   return (
     <>
       <div className="container">
@@ -21,20 +43,37 @@ export default function Login() {
                 We&apos;re glad to see you again. Log in to continue tracking
                 your finances
               </p>
-              <form action="" className="flex flex-col gap-7 text-black">
-                <div className="">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex flex-col gap-7 text-black"
+              >
+                <div className="flex flex-col gap-y-2">
                   <input
                     type="email"
+                    {...register("email", { required: true })}
                     placeholder="Enter your email "
                     className="w-[100%] md:w-[80%] input"
                   />
+                  {errors.email && (
+                    <span className="text-red-500 text-lg px-4 font-bold">
+                      Email is required
+                    </span>
+                  )}
                 </div>
-                <div>
+                <div className="flex flex-col gap-y-2">
                   <input
                     type="password"
+                    {...register("password", {
+                      required: true,
+                    })}
                     placeholder="Enter Your password "
                     className="w-[100%] md:w-[80%] input"
                   />
+                  {errors.password && (
+                    <span className="text-red-500 text-lg px-4 font-bold">
+                      Password is required
+                    </span>
+                  )}
                 </div>
                 <button
                   type="submit"
