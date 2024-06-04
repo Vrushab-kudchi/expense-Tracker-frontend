@@ -44,10 +44,10 @@ const Dashboard = () => {
             <GiExpense className="bg-white text-6xl rounded-full p-4" />
           </div>
           <div className="flex flex-col">
-            <h1 className="text-2xl">{info?.maxExpense.money}</h1>
+            <h1 className="text-2xl">{info?.maxExpense?.money || 0}</h1>
             <h1 className="text-gray-700">Maximum amount Spent</h1>
             <p className="text-lg">
-              {moment(info?.maxExpense.createdAt).fromNow()}
+              {moment(info?.maxExpense?.createdAt).fromNow()}
             </p>
           </div>
         </div>
@@ -56,10 +56,10 @@ const Dashboard = () => {
             <MdOutlineAttachMoney className="bg-white text-6xl rounded-full p-4" />
           </div>
           <div className="flex flex-col">
-            <h1 className="text-2xl">{info?.maxIncome.money}</h1>
+            <h1 className="text-2xl">{info?.maxIncome?.money || 0}</h1>
             <h1 className="text-gray-700">Maximum amount Earned</h1>
             <p className="text-lg">
-              {moment(info?.maxIncome.createdAt).fromNow()}
+              {moment(info?.maxIncome?.createdAt).fromNow()}
             </p>
           </div>
         </div>
