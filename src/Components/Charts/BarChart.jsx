@@ -7,18 +7,31 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { monthData } from "../../../constants/demoData";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { monthsTransaction } from "../../feature/transactions/transactionSlice";
 
 export default function MyBarChart() {
+  const dispatch = useDispatch();
+  const monthData = useSelector((state) => state.transaction.monthsTransaction);
+
+  useEffect(() => {
+    if (monthData === null) {
+      dispatch(monthsTransaction());
+    }
+  }, [monthData, dispatch]);
+
   const monthTotals = {};
-  for (const month in monthData.data) {
-    const income = monthData.data[month]
-      .filter((data) => data.category === "income")
-      .reduce((cur, nex) => cur + nex.money, 0);
-    const expense = monthData.data[month]
-      .filter((data) => data.category === "expense")
-      .reduce((cur, nex) => cur + nex.money, 0);
-    monthTotals[month] = { month, income, expense };
+  if (monthData && monthData.data) {
+    for (const month in monthData.data) {
+      const income = monthData?.data[month]
+        .filter((data) => data.category === "income")
+        .reduce((cur, nex) => cur + nex.money, 0);
+      const expense = monthData?.data[month]
+        .filter((data) => data.category === "expense")
+        .reduce((cur, nex) => cur + nex.money, 0);
+      monthTotals[month] = { month, income, expense };
+    }
   }
 
   // Convert monthTotals object to an array of objects
