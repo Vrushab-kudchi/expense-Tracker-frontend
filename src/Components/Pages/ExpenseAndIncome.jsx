@@ -6,6 +6,7 @@ import {
   addTransaction,
   getAllTransaction,
   removeTransaction,
+  transactionInfo,
 } from "../../feature/transactions/transactionSlice";
 import { useForm } from "react-hook-form";
 
@@ -32,7 +33,10 @@ export default function ExpenseAndIncome({ type }) {
     } else {
       dispatch(addTransaction(parseData));
     }
-    dispatch(getAllTransaction());
+    setTimeout(() => {
+      dispatch(getAllTransaction());
+      dispatch(transactionInfo());
+    }, 1000);
     reset(); // Clear the form after submission
   };
 
@@ -108,7 +112,7 @@ export default function ExpenseAndIncome({ type }) {
                           : "text-green-500"
                       }
                     >
-                      {" "}
+                      {item.category === "expense" ? "-" : "+"}
                       {item.money}
                     </p>
                   </div>

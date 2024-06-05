@@ -17,7 +17,7 @@ export default function Header({ setSidebarToggle, sidebarToggle }) {
           className="hidden md:block w-14 h-14 object-cover object-center rounded-full"
         />
         <div className="flex flex-col justify-start">
-          <h1 className="text-sm md:text-xl">{user.name}</h1>
+          <h1 className="text-lg md:text-xl">{user.name}</h1>
           <p className="">{user.email}</p>
         </div>
       </div>

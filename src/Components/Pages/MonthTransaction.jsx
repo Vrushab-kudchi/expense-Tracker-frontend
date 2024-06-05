@@ -2,6 +2,7 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { monthsTransaction } from "../../feature/transactions/transactionSlice";
+import MyBarChart from "../Charts/BarChart";
 
 export default function MonthTransaction() {
   const dispatch = useDispatch();
@@ -17,14 +18,22 @@ export default function MonthTransaction() {
 
   return (
     <div className="overflow-y-auto h-[85vh]">
-      <h1 className="text-4xl">Monthly Transactions</h1>
+      <h1 className="p-5 mb-5 text-4xl">Monthly Transactions</h1>
+      <div className="hidden md:flex justify-center">
+        <MyBarChart />
+      </div>
+      <div className="md:hidden font-bold">
+        <h1 className="text-lg text-red-400 my-2">
+          Chart Cannot Load in Mobile. Please Login Through a Computer.
+        </h1>
+      </div>
       {monthTransaction?.data ? (
         Object.keys(monthTransaction.data)?.map((month, index) => (
           <div
             key={index}
-            className="bg-[var(--color-primary)] m-5 p-5 rounded-3xl"
+            className="bg-[var(--color-primary)] y-5 px-2 py-4 rounded-3xl"
           >
-            <h2 className="text-5xl px-7 underline">{month}</h2>
+            <h2 className="text-3xl px-7 underline">{month}</h2>
             <ul>
               {monthTransaction.data[month]?.map((transaction, idx) => {
                 const createdAt = moment(transaction.createdAt);

@@ -15,10 +15,16 @@ const getUserProfile = async () => {
   return response;
 };
 
+const logout = async () => {
+  const response = await axiosInstance.post("/api/user/logout");
+  return response;
+};
+
 const authService = {
   userLogin,
   userRegistration,
   getUserProfile,
+  logout,
 };
 
 export default authService;

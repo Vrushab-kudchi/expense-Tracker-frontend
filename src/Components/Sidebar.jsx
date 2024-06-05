@@ -1,8 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import { sidebarData } from "../../constants/sidebar";
+import { useDispatch } from "react-redux";
+import { logout } from "../feature/auth/authSlice";
 
 export default function Sidebar() {
   const path = useLocation().pathname;
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -14,6 +17,23 @@ export default function Sidebar() {
           <div>
             <ul className="mt-10">
               {sidebarData.map((item, index) => {
+                if (item.name === "logout")
+                  return (
+                    <li
+                      key={index}
+                      onClick={() => dispatch(logout())}
+                      className={`py-5 my-2 hover:bg-slate-500 rounded-3xl px-3 ${
+                        path === item.path ? "bg-slate-500" : ""
+                      }`}
+                    >
+                      <div className="flex text-xl justify-start items-center gap-x-4">
+                        <div>
+                          <span>{item.icon}</span>
+                        </div>
+                        <div>{item.name}</div>
+                      </div>
+                    </li>
+                  );
                 return (
                   <Link to={item.path} key={index}>
                     <li

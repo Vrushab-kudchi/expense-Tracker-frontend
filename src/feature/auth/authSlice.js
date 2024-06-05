@@ -47,6 +47,15 @@ export const getUserProfile = createAsyncThunk(
   }
 );
 
+export const logout = createAsyncThunk("user/logout", async (thunkAPI) => {
+  try {
+    const response = await authService.logout();
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data.message);
+  }
+});
+
 const authSlice = createSlice({
   name: "login",
   initialState,
@@ -109,7 +118,9 @@ const authSlice = createSlice({
       state.isSuccess = false;
       state.isError = true;
       state.message = action.payload;
-      toast.error(!action.payload ? "Server Error " : action.payload);
+    });
+    builder.addCase(logout.fulfilled, () => {
+      return initialState;
     });
   },
 });
