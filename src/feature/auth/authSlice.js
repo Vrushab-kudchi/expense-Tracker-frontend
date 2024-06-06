@@ -8,7 +8,7 @@ let initialState = {
   isLoading: false,
   isError: false,
   message: "",
-  user: {},
+  user: null,
 };
 
 export const userLogin = createAsyncThunk(

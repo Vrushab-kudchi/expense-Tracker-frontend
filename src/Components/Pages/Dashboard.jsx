@@ -20,7 +20,7 @@ const Dashboard = () => {
     if (info === null) {
       dispatch(transactionInfo());
     }
-    if (!user) {
+    if (user === null) {
       dispatch(getUserProfile());
     }
   }, [dispatch, info]);
