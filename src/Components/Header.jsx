@@ -1,9 +1,18 @@
 import { BiMenuAltLeft } from "react-icons/bi";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUserProfile } from "../feature/auth/authSlice";
 
 export default function Header({ setSidebarToggle, sidebarToggle }) {
   const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(getUserProfile());
+    }
+  }, [dispatch, user]);
   return (
     <header className="w-[98%] my-4 mx-1 md:m-4  px-4 py-4 rounded-2xl bg-[var(--color-primary)] flex justify-between items-center">
       <BiMenuAltLeft
