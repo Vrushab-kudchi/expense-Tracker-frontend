@@ -26,7 +26,7 @@ export default function Register() {
 
   return (
     <>
-      <div className="container h-auto md:h-screen my-20 md:my-0 flex justify-center items-center">
+      <div className="container h-auto md:h-screen my-60 md:my-0 flex justify-center items-center">
         <div className="flex flex-wrap-reverse h-auto w-[95%] rounded-3xl md:flex-nowrap justify-center items-center bg-[var(--color-primary)] p-5 md:gap-14">
           <div>
             <p className="text-gray-400 text-2xl p-5">Start for free</p>

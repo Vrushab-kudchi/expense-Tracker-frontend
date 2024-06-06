@@ -8,18 +8,26 @@ import { FaMoneyBillAlt } from "react-icons/fa";
 import { FcMoneyTransfer } from "react-icons/fc";
 import { GrAdd } from "react-icons/gr";
 import BarChart from "../Charts/BarChart";
+import { getUserProfile } from "../../feature/auth/authSlice";
+import Loading from "../Loading";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const info = useSelector((state) => state.transaction.info);
+  const user = useSelector((state) => state.auth.user);
+  const isLoading = useSelector((state) => state.transaction.isLoading);
   useEffect(() => {
     if (info === null) {
       dispatch(transactionInfo());
+    }
+    if (!user) {
+      dispatch(getUserProfile());
     }
   }, [dispatch, info]);
 
   return (
     <>
+      {isLoading && <Loading />}
       <div className="">
         <h1 className="p-5 mb-5 text-4xl">Dashboard</h1>
         <div className="md:flex md:gap-x-4 md:flex-wrap">

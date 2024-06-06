@@ -2,10 +2,12 @@ import moment from "moment";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTransaction } from "../../feature/transactions/transactionSlice";
+import Loading from "../Loading";
 
 export default function Transactions() {
   const dispatch = useDispatch();
   const transactions = useSelector((state) => state.transaction.transactions);
+  const isLoading = useSelector((state) => state.transaction.isLoading);
   useEffect(() => {
     if (transactions === null) {
       dispatch(getAllTransaction());
@@ -13,6 +15,7 @@ export default function Transactions() {
   }, [transactions]);
   return (
     <>
+      {isLoading && <Loading />}
       <h1 className="p-5 mb-5 text-4xl">Transactions</h1>
       <div className="overflow-y-auto">
         <ul className="overflow-y-auto h-[80vh] ">

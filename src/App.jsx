@@ -11,6 +11,7 @@ import MonthTransaction from "./Components/Pages/MonthTransaction";
 import { Toaster } from "sonner";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute";
 import { useSelector } from "react-redux";
+import NotFoundPage from "./Components/Pages/NotFoundPage";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -34,6 +35,7 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </>

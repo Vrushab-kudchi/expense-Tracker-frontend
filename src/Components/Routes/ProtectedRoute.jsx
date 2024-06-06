@@ -1,20 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { getUserProfile } from "../../feature/auth/authSlice";
 
 export default function ProtectedRoute() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const user = useSelector((state) => state.auth.user);
+
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    if (!isLoggedIn && user) {
-      dispatch(getUserProfile());
+    if (!token) {
       navigate("/login");
     }
-  }, [isLoggedIn, navigate, user]);
+  }, [navigate, token]);
 
-  return isLoggedIn ? <Outlet /> : null;
+  return <Outlet />;
 }
