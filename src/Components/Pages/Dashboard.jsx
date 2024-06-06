@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { transactionInfo } from "../../feature/transactions/transactionSlice";
 import moment from "moment";
@@ -7,9 +7,10 @@ import { MdOutlineAttachMoney } from "react-icons/md";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { FcMoneyTransfer } from "react-icons/fc";
 import { GrAdd } from "react-icons/gr";
-import BarChart from "../Charts/BarChart";
 import { getUserProfile } from "../../feature/auth/authSlice";
 import Loading from "../Loading";
+
+const BarChart = lazy(() => import("../Charts/BarChart"));
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -95,7 +96,9 @@ const Dashboard = () => {
           </h1>
         </div>
         <div className="hidden md:flex justify-center">
-          <BarChart />
+          <Suspense fallback={<Loading />}>
+            <BarChart />
+          </Suspense>
         </div>
       </div>
     </>
