@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { Toaster } from "sonner";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute";
-import { useSelector } from "react-redux";
 import Loading from "./Components/Loading";
 
 // Lazy load components
