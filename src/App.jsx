@@ -21,8 +21,7 @@ const MonthTransaction = lazy(() =>
 const NotFoundPage = lazy(() => import("./Components/Pages/NotFoundPage"));
 
 function App() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const user = useSelector((state) => state.auth.user);
+  const token = localStorage.getItem("token");
 
   return (
     <>
@@ -32,10 +31,7 @@ function App() {
           <Routes>
             <Route element={<ProtectedRoute />}>
               <Route element={<DashboardLayout />}>
-                <Route
-                  path="/"
-                  element={isLoggedIn || user ? <Dashboard /> : <Login />}
-                />
+                <Route path="/" element={token ? <Dashboard /> : <Login />} />
                 <Route path="/expense" element={<Expense type={"expense"} />} />
                 <Route path="/income" element={<Expense type={"income"} />} />
                 <Route path="/transaction" element={<Transactions />} />
