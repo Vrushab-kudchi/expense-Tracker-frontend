@@ -68,8 +68,8 @@ const authSlice = createSlice({
       state.isSuccess = true;
       state.isLoading = false;
       state.message = action.payload.message;
-      state.token = localStorage.getItem("token");
       toast.success(action.payload.message);
+      state.token = localStorage.getItem("token");
     }),
       builder.addCase(userLogin.pending, (state) => {
         state.isLoading = true;

@@ -6,7 +6,7 @@ import { userLogin } from "../../feature/auth/authSlice";
 
 export default function Login() {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
   const {
     register,
@@ -15,10 +15,10 @@ export default function Login() {
   } = useForm();
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (token) {
       navigate("/");
     }
-  }, [isLoggedIn, navigate]);
+  }, [token, navigate]);
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));
