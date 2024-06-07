@@ -20,8 +20,6 @@ const MonthTransaction = lazy(() =>
 const NotFoundPage = lazy(() => import("./Components/Pages/NotFoundPage"));
 
 function App() {
-  const token = localStorage.getItem("token");
-
   return (
     <>
       <Toaster position="top-right" />
@@ -30,7 +28,7 @@ function App() {
           <Routes>
             <Route element={<ProtectedRoute />}>
               <Route element={<DashboardLayout />}>
-                <Route path="/" element={token ? <Dashboard /> : <Login />} />
+                <Route path="/" element={<Dashboard />} />
                 <Route path="/expense" element={<Expense type={"expense"} />} />
                 <Route path="/income" element={<Expense type={"income"} />} />
                 <Route path="/transaction" element={<Transactions />} />
