@@ -7,7 +7,6 @@ import { MdOutlineAttachMoney } from "react-icons/md";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { FcMoneyTransfer } from "react-icons/fc";
 import { GrAdd } from "react-icons/gr";
-import { getUserProfile } from "../../feature/auth/authSlice";
 import Loading from "../Loading";
 
 const BarChart = lazy(() => import("../Charts/BarChart"));
@@ -15,16 +14,13 @@ const BarChart = lazy(() => import("../Charts/BarChart"));
 const Dashboard = () => {
   const dispatch = useDispatch();
   const info = useSelector((state) => state.transaction.info);
-  const user = useSelector((state) => state.auth.user);
+
   const isLoading = useSelector((state) => state.transaction.isLoading);
   useEffect(() => {
     if (info === null) {
       dispatch(transactionInfo());
     }
-    if (user === null) {
-      dispatch(getUserProfile());
-    }
-  }, [dispatch, info]);
+  }, [info]);
 
   return (
     <>
