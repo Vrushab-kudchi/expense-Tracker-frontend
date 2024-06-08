@@ -22,8 +22,8 @@ export default function Sidebar() {
                     <li
                       key={index}
                       onClick={() => {
-                        dispatch(logout());
                         localStorage.clear();
+                        dispatch(logout());
                       }}
                       className={`py-5 my-2 hover:bg-slate-500 rounded-3xl px-3 ${
                         path === item.path ? "bg-slate-500" : ""
